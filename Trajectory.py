@@ -42,3 +42,5 @@ def CreateTrajectory():
     return Trajectory
 
 def PrintTrajectory(Trajectory):
+    for leg in Trajectory:
+        leg.PrintLegInfo()
