@@ -3,6 +3,8 @@ import RPi.GPIO as GPIO
 import time
 
 # Create trajectory
+Trajectory = CreateTrajectory()
+PrintTrajectory(Trajectory)
 
 # Create stepper-command from trajectory
 
