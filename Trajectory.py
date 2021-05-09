@@ -24,23 +24,25 @@ class Leg:
     def maxspeed(self):
         return self.__maxspeed
 
-def CreateTrajectory():
-    Trajectory = []
-    leg = Leg()
-    leg.DefineLeg(100, 0, 1, 10)
-    Trajectory.append(leg)
-    leg.DefineLeg(90, 999, 1, 10)
-    Trajectory.append(leg)
-    leg.DefineLeg(100, 0, 1, 10)
-    Trajectory.append(leg)
-    leg.DefineLeg(90, 999, 1, 10)
-    Trajectory.append(leg)
-    leg.DefineLeg(100, 0, 1, 10)
-    Trajectory.append(leg)
-    leg.DefineLeg(90, 999, 1, 10)
-    Trajectory.append(leg)
-    return Trajectory
+class Trajectory:
+    def __init__(self):
+        Trajectory = []
+        
+    def CreateSample(self):
+        leg = Leg()
+        leg.DefineLeg(100, 0, 1, 10)
+        Trajectory.append(leg)
+        leg.DefineLeg(90, 999, 1, 10)
+        Trajectory.append(leg)
+        leg.DefineLeg(100, 0, 1, 10)
+        Trajectory.append(leg)
+        leg.DefineLeg(90, 999, 1, 10)
+        Trajectory.append(leg)
+        leg.DefineLeg(100, 0, 1, 10)
+        Trajectory.append(leg)
+        leg.DefineLeg(90, 999, 1, 10)
+        Trajectory.append(leg)
 
-def PrintTrajectory(Trajectory):
-    for leg in Trajectory:
-        leg.PrintLegInfo()
+    def Print(self):
+        for leg in Trajectory:
+            leg.PrintLegInfo()
