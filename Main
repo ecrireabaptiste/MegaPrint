@@ -1,3 +1,4 @@
+import math
 
 class Leg:
     def DefineLeg(self, dist_angle, curbature, printing, speed):
@@ -34,25 +35,21 @@ class Config:
         self.phiwheel = 122 
 
 class Cmd:
-    def __init__(self):
-        self.FreqR = 0
-        self.FreqL = 0
-        self.DirR = 1
-        self.DirL = 1
-        self.t = 0
-    def ProcessLeg(self, leg, c)
+    def ConvertLegToCmd(self, leg, c)
         self.t = leg.dist_angle/leg.speed
+        self.print = leg.printing
         if abs(leg.curbature) = 999:
-            self.DirR = dir_sign(leg.curbature)
-            self.DirL = dir_sign(-leg.curbature)
-            self.FreqR = abss(leg.speed*c.nbsteps*c.l/c.phiwheel)
-            self.FreqL = abss(leg.speed*c.nbsteps*c.l/c.phiwheel)
+            self.DirL = dir_sign(leg.curbature)
+            self.DirR = dir_sign(-leg.curbature)
+            self.FreqL = abss(leg.speed*c.nbsteps*c.l/(c.phiwheel*2*math.pi))
+            self.FreqR = abss(leg.speed*c.nbsteps*c.l/(c.phiwheel*2*math.pi))
         else:
-            self.DirR = dir_sign(leg.speed*(1-leg.curbature*c.l))
-            self.DirL = dir_sign(leg.speed*(1+leg.curbature*c.l))
-            self.FreqR = c.nbsteps/c.phiwheel*abss(leg.speed*(1-leg.curbature*c.l))
-            self.FreqL = c.nbsteps/c.phiwheel*abss(leg.speed*(1+leg.curbature*c.l))
-        
+            self.DirL = dir_sign(leg.speed*(1-leg.curbature*c.l))
+            self.DirR = dir_sign(leg.speed*(1+leg.curbature*c.l))
+            self.FreqL = c.nbsteps/(c.phiwheel*2*math.pi)*abss(leg.speed*(1-leg.curbature*c.l))
+            self.FreqR = c.nbsteps/(c.phiwheel*2*math.pi)*abss(leg.speed*(1+leg.curbature*c.l))
+    def PrintCmdInfo(self):
+        print(self.DirL, self.FreqL, self.print, self.FreqR, self.DirR)     
     def abss(x):
         return max(abs(x), 0.01)
     def dir_sign(x):
@@ -66,7 +63,7 @@ class CmdSequence:
         self.cmdseq = []
     def Append(self, leg):
         cmd = Cmd()
-        cmd.ProcessLeg(leg)
+        cmd.ConvertLegToCmd(leg)
         self.cmdseq.append(cmd)      
     def Print(self):
         for leg in self.traj:
