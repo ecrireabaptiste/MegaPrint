@@ -61,14 +61,17 @@ class Cmd:
 class CmdSequence:
     def __init__(self):
         self.cmdseq = []
-    def Append(self, leg):
+    def ConvertTrajectoryToCmdSequence(self, trajectory, config):
+        for leg in trajectory:
+            self.Append(leg, config)
+    def Append(self, leg, config):
         cmd = Cmd()
-        cmd.ConvertLegToCmd(leg)
-        self.cmdseq.append(cmd)      
+        cmd.ConvertLegToCmd(leg, config)
+        self.cmdseq.append(cmd)
     def Print(self):
-        for leg in self.traj:
-            leg.PrintLegInfo()
-
+        for cmd in self.cmdseq:
+            cmd.PrintCmdInfo()
+        
 
 # Create trajectory
 config = Config()
@@ -77,7 +80,10 @@ traj.CreateSample()
 traj.Print()
 
 # Create stepper-command from trajectory
+cmdseq = CmdSequence()
+cmdseq.ConvertTrajectoryToCmdSequence(traj, config)
+cmdseq.Print()
 
-# Process stepper-command
+# Process stepper-command by steppers
 
 # shut down
