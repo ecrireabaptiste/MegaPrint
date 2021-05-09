@@ -1,5 +1,6 @@
-import Module_Trajectory
-import Module_Stepper
+import Trajectory
+import RPi.GPIO as GPIO
+import time
 
 # Create trajectory
 
