@@ -41,6 +41,7 @@ class Stepper:
     GPIO.output(self.pinDir, dir)
     
   def Start(self):
+    GPIO.output(self.pinSleep, GPIO.HIGH)
     self.pwm.start(dutycycle)
     
   def Stop(self):
