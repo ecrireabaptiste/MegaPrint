@@ -54,7 +54,7 @@ class Stepper:
       GPIO.output(self.pinSleep, GPIO.LOW)
     else:
       GPIO.output(self.pinSleep, GPIO.HIGH)
-      
-  def SetResolution(self, resolution):
-    #
+       
+  def SetResolution(self, microstep):
+    GPIO.output(self.pin_microstep, self.resolution[self.microstep])
    
