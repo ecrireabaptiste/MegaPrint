@@ -6,19 +6,20 @@ class Robot:
     self.nbsteps = 200
     self.l = 256/2
     self.phiwheel = 122
-    self.stpr1 = Stepper(20, 15, 16, 12,  7,  8)
-    self.stpr2 = Stepper(9,  11, 10, 22, 27, 17)
+    self.stpr1 = Stepper(20, 15, 16, 12,  7,  8, False)
+    self.stpr2 = Stepper(9,  11, 10, 22, 27, 17, True)
     
     
 class Stepper:
   # requires "import RPi.GPIO as GPIO" and "GPIO.setmode(GPIO.BCM)"
-  def __init__(self, pinDir, pinStep, pinSleep, pinM0, pinM1, pinM2)
-    self.pinDir = pinDIR
+  def __init__(self, pinDir, pinStep, pinSleep, pinM0, pinM1, pinM2, reverse):
+    self.pinDir = pinDir
     self.pinStep = pinStep
     self.pinSleep = pinSleep
     self.pinMicrostep = (pinM0, pinM1, pinM2)
     self.dutycycle = 50
     self.microstep = 1
+    self.reverse = reverse
     self.resolution =  {1 : (0, 0, 0),
                         2 : (1, 0, 0),
                         4 : (0, 1, 0),
@@ -31,22 +32,23 @@ class Stepper:
     GPIO.setup(self.pinSleep, GPIO.OUT)
     GPIO.setup(self.pinMicrostep, GPIO.OUT)
 
-    GPIO.output(self.pinMicrostep, resolution[self.microstep])
+    GPIO.output(self.pinMicrostep, self.resolution[self.microstep])
     GPIO.output(self.pinStep, GPIO.LOW)
     GPIO.output(self.pinSleep, GPIO.HIGH)
 
   def SetMicroStep(self, microstep):
     self.microstep = microstep
-    GPIO.output(self.pin_microstep, self.resolution[self.microstep])
+    GPIO.output(self.pinMicrostep, self.resolution[self.microstep])
     
   def SetFreqDir(self, freq, dir):
     #self.pwm.ChangeDutyCycle(XXXXXXX)
     self.pwm.ChangeFrequency(freq)
+    dir = 1-dir if self.reverse else dir
     GPIO.output(self.pinDir, dir)
     
   def Start(self):
     GPIO.output(self.pinSleep, GPIO.HIGH)
-    self.pwm.start(dutycycle)
+    self.pwm.start(self.dutycycle)
     
   def Stop(self):
     self.pwm.stop()
@@ -59,6 +61,4 @@ class Stepper:
     else:
       GPIO.output(self.pinSleep, GPIO.HIGH)
        
-  def SetResolution(self, microstep):
-    GPIO.output(self.pin_microstep, self.resolution[self.microstep])
    
