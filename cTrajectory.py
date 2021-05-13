@@ -28,11 +28,6 @@ class Trajectory:
     def Print(self):
         for leg in self.traj:
             leg.PrintLegInfo()
-class Config:
-    def __init__(self):
-        self.nbsteps = 200
-        self.l = 256/2
-        self.phiwheel = 122 
 
 class Cmd:
     def abss(self, x):
