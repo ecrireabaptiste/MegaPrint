@@ -46,3 +46,5 @@ class Trajectory:
     def Print(self):
         for leg in Trajectory:
             leg.PrintLegInfo()
+
+           
