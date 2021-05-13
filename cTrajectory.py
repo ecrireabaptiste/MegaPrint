@@ -37,19 +37,19 @@ class Cmd:
             return 1
         else:
             return 0
-    def ConvertLegToCmd(self, leg, c):
+    def ConvertLegToCmd(self, leg, r):
         self.t = leg.dist_angle/leg.speed
         self.print = leg.printing
         if abs(leg.curbature) == 999:
             self.DirL = self.dir_sign(leg.curbature)
             self.DirR = self.dir_sign(-leg.curbature)
-            self.FreqL = self.abss(leg.speed*c.nbsteps*c.l/(c.phiwheel*2*math.pi))
-            self.FreqR = self.abss(leg.speed*c.nbsteps*c.l/(c.phiwheel*2*math.pi))
+            self.FreqL = self.abss(leg.speed*r.nbsteps*r.l/(r.phiwheel*2*math.pi))
+            self.FreqR = self.abss(leg.speed*r.nbsteps*r.l/(r.phiwheel*2*math.pi))
         else:
-            self.DirL = self.dir_sign(leg.speed*(1-leg.curbature*c.l))
-            self.DirR = self.dir_sign(leg.speed*(1+leg.curbature*c.l))
-            self.FreqL = c.nbsteps/(c.phiwheel*2*math.pi)*self.abss(leg.speed*(1-leg.curbature*c.l))
-            self.FreqR = c.nbsteps/(c.phiwheel*2*math.pi)*self.abss(leg.speed*(1+leg.curbature*c.l))
+            self.DirL = self.dir_sign(leg.speed*(1-leg.curbature*r.l))
+            self.DirR = self.dir_sign(leg.speed*(1+leg.curbature*r.l))
+            self.FreqL = r.nbsteps/(r.phiwheel*2*math.pi)*self.abss(leg.speed*(1-leg.curbature*r.l))
+            self.FreqR = r.nbsteps/(r.phiwheel*2*math.pi)*self.abss(leg.speed*(1+leg.curbature*r.l))
     def PrintCmdInfo(self):
         print(self.DirL, self.FreqL, self.print, self.FreqR, self.DirR)     
 
