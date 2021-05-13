@@ -6,12 +6,12 @@ robot = cStepper.Robot()
 
 # Create trajectory
 #config = Config()
-traj = Trajectory()
+traj = cTrajectory.Trajectory()
 traj.CreateSample()
 traj.Print()
 
 # Create stepper-command from trajectory
-cmdseq = CmdSequence()
+cmdseq = cTrajectory.CmdSequence()
 cmdseq.ConvertTrajectoryToCmdSequence(traj, robot)
 cmdseq.Print()
 
