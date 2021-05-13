@@ -1,3 +1,0 @@
-import cStepper
-stepper = cStepper.Stepper(20, 15, 16, 12,  7,  8)
-stepper.SetFreqDir(100, 1)

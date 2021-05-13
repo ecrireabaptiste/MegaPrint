@@ -1,0 +1,28 @@
+import cStepper
+import time
+
+stpr1 = cStepper.Stepper(20, 15, 16, 12,  7,  8, False)
+stpr2 = cStepper.Stepper(9,  11, 10, 22, 27, 17, True)
+
+
+stpr1.Sleep(False)
+stpr2.Sleep(False)
+time.sleep(1)
+stpr1.Sleep(True)
+stpr2.Sleep(True)
+
+stpr1.SetMicroStep(4)
+stpr2.SetMicroStep(4)
+stpr1.SetFreqDir(500, 1)
+stpr2.SetFreqDir(500, 1)
+stpr1.Start()
+stpr2.Start()
+time.sleep(4)
+stpr1.SetFreqDir(100, 1)
+stpr2.SetFreqDir(100, 1)
+time.sleep(4)
+stpr1.Stop()
+stpr2.Stop()
+
+
+   
