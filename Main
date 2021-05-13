@@ -1,5 +1,3 @@
-    import math
-
 class Leg:
     def DefineLeg(self, dist_angle, curbature, printing, speed):
         self.dist_angle = dist_angle
