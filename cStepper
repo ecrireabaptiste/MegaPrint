@@ -1,3 +1,6 @@
+import RPi.GPIO as GPIO
+GPIO.setmode(GPIO.BCM)
+
 class Robot:
   def __init__(self):
     self.nbsteps = 200
@@ -8,6 +11,7 @@ class Robot:
     
     
 class Stepper:
+  # requires "import RPi.GPIO as GPIO" and "GPIO.setmode(GPIO.BCM)"
   def __init__(self, pinDir, pinStep, pinSleep, pinM0, pinM1, pinM2)
     self.pinDir = pinDIR
     self.pinStep = pinStep
